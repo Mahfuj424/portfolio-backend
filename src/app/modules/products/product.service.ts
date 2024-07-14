@@ -12,7 +12,7 @@ const getSingleProductFromDB = async (id: string) => {
   return result;
 };
 
-export const getAllProductFromDB = async (filterOptions: TFilterOptions) => {
+export const getAllProductFromDB = async (filterOptions:TFilterOptions) => {
   const { minPrice, maxPrice, sortBy, searchTerm } = filterOptions;
 
   let query = Product.find();
@@ -20,7 +20,7 @@ export const getAllProductFromDB = async (filterOptions: TFilterOptions) => {
   if (minPrice !== undefined) {
     query = query.where('price').gte(minPrice);
   }
-  
+
   if (maxPrice !== undefined) {
     query = query.where('price').lte(maxPrice);
   }
@@ -32,15 +32,24 @@ export const getAllProductFromDB = async (filterOptions: TFilterOptions) => {
     ]);
   }
 
-  if (sortBy === 'lowToHigh') {
-    query = query.sort({ price: 1 });
-  } else if (sortBy === 'highToLow') {
-    query = query.sort({ price: -1 });
+  switch (sortBy) {
+    case 'Price - Low to High':
+      query = query.sort({ price: 1 });
+      break;
+    case 'Price - High to Low':
+      query = query.sort({ price: -1 });
+      break;
+    case 'Default':
+      query = query.sort({});
+      break;
+    default:
+      query = query.sort({});
   }
 
   const result = await query.exec();
   return result;
 };
+
 
 const updateProductIntoDB = async (id: string, payload: Partial<TProduct>) => {
   const result = await Product.findByIdAndUpdate(
@@ -59,29 +68,7 @@ const deleteProductFromDB = async (id: string) => {
   return result;
 };
 
-const getAvailableProductFromDB = async (filterOptions: TFilterOptions) => {
-  const { minPrice, maxPrice, sortBy } = filterOptions;
 
-  const query: any = {};
-
-  if (minPrice !== undefined && maxPrice !== undefined) {
-    query.price = { $gte: minPrice, $lte: maxPrice };
-  } else if (minPrice !== undefined) {
-    query.price = { $gte: minPrice };
-  } else if (maxPrice !== undefined) {
-    query.price = { $lte: maxPrice };
-  }
-
-  const sort: any = {};
-  if (sortBy === "highToLow") {
-    sort.price = -1;
-  } else if (sortBy === "lowToHigh") {
-    sort.price = 1;
-  }
-
-  const products = await Product.find(query).sort(sort);
-  return products;
-};
 
 export const productSerivces = {
   createProductIntoDB,
@@ -89,5 +76,4 @@ export const productSerivces = {
   getAllProductFromDB,
   updateProductIntoDB,
   deleteProductFromDB,
-  getAvailableProductFromDB,
 };

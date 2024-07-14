@@ -9,10 +9,10 @@ export type TProduct = {
 };
 
 export type TFilterOptions = {
-    minPrice?: number;
-    maxPrice?: number;
-    sortBy?: 'lowToHigh' | 'highToLow';
-    name?: string;
-    brand?: string;
-    searchTerm?:string
+  minPrice?: number;
+  maxPrice?: number;
+  sortBy?: "Price - Low to High" | "Price - High to Low" | "Default";
+  name?: string;
+  brand?: string;
+  searchTerm?: string;
 };
