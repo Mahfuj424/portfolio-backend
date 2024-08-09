@@ -46,7 +46,9 @@ const getAllProduct = catchAsync(async (req, res, next) => {
     minPrice: minPrice !== undefined ? Number(minPrice) : undefined,
     maxPrice: maxPrice !== undefined ? Number(maxPrice) : undefined,
     sortBy:
-      sortBy !== undefined ? (sortBy as "lowToHigh" | "highToLow") : undefined,
+      sortBy !== undefined
+        ? (sortBy as "Price - Low to High" | "Price - High to Low" | "Default")
+        : undefined,
     searchTerm: searchTerm !== undefined ? String(searchTerm) : undefined,
   };
 
@@ -104,27 +106,7 @@ const deleteProduct = catchAsync(async (req, res, next) => {
   });
 });
 
-const getAvailableProduct = catchAsync(async (req, res, next) => {
-  const { minPrice, maxPrice, sortBy } = req.query;
 
-  const filterOptions: TFilterOptions = {
-    minPrice: minPrice !== undefined ? Number(minPrice) : undefined,
-    maxPrice: maxPrice !== undefined ? Number(maxPrice) : undefined,
-    sortBy:
-      sortBy !== undefined ? (sortBy as "lowToHigh" | "highToLow") : undefined,
-  };
-
-  const products = await productSerivces.getAvailableProductFromDB(
-    filterOptions
-  );
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Products fetched successfully",
-    data: products,
-  });
-});
 
 export const prouductControllers = {
   createProduct,
