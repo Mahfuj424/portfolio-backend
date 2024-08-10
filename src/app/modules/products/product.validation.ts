@@ -8,7 +8,7 @@ const productValidationSchema = z.object({
     brand: z.string().nonempty({ message: "Brand is required" }),
     quantity: z.number().min(1, { message: "Quantity must be at least 1" }),
     price: z.number().min(0, { message: "Price must be at least 0" }),
-    rating: z.number().min(0, { message: "Rating is required" }),
+    rating: z.number().min(0, { message: "Rating is required"  }),
   }),
 });
 

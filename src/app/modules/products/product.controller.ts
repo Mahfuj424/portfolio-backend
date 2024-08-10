@@ -106,7 +106,27 @@ const deleteProduct = catchAsync(async (req, res, next) => {
   });
 });
 
+const decreaseProductQuantity = catchAsync(async (req, res) => {
+  const { id } = req.params;
 
+  const updatedProduct = await productSerivces.decreaseProductQuantity(id);
+
+  if (!updatedProduct) {
+    return sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      message: "Product not found",
+      data: [],
+    });
+  }
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Product quantity decreased successfully",
+    data: updatedProduct,
+  });
+});
 
 export const prouductControllers = {
   createProduct,
@@ -114,4 +134,5 @@ export const prouductControllers = {
   getAllProduct,
   updateProduct,
   deleteProduct,
+  decreaseProductQuantity
 };

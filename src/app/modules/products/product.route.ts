@@ -13,6 +13,8 @@ router.post(
 
 router.get("/:id", prouductControllers.getSingleProduct);
 
+router.patch("/:id/decrease", prouductControllers.decreaseProductQuantity);
+
 router.get("/", prouductControllers.getAllProduct);
 
 router.put(
@@ -21,7 +23,6 @@ router.put(
   prouductControllers.updateProduct
 );
 
-
-router.delete('/:id', prouductControllers.deleteProduct)
+router.delete("/:id", prouductControllers.deleteProduct);
 
 export const productRoutes = router;

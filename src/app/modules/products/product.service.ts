@@ -12,17 +12,17 @@ const getSingleProductFromDB = async (id: string) => {
   return result;
 };
 
-export const getAllProductFromDB = async (filterOptions:TFilterOptions) => {
+export const getAllProductFromDB = async (filterOptions: TFilterOptions) => {
   const { minPrice, maxPrice, sortBy, searchTerm } = filterOptions;
 
   let query = Product.find();
 
   if (minPrice !== undefined) {
-    query = query.where('price').gte(minPrice);
+    query = query.where("price").gte(minPrice);
   }
 
   if (maxPrice !== undefined) {
-    query = query.where('price').lte(maxPrice);
+    query = query.where("price").lte(maxPrice);
   }
 
   if (searchTerm) {
@@ -33,13 +33,13 @@ export const getAllProductFromDB = async (filterOptions:TFilterOptions) => {
   }
 
   switch (sortBy) {
-    case 'Price - Low to High':
+    case "Price - Low to High":
       query = query.sort({ price: 1 });
       break;
-    case 'Price - High to Low':
+    case "Price - High to Low":
       query = query.sort({ price: -1 });
       break;
-    case 'Default':
+    case "Default":
       query = query.sort({});
       break;
     default:
@@ -49,7 +49,6 @@ export const getAllProductFromDB = async (filterOptions:TFilterOptions) => {
   const result = await query.exec();
   return result;
 };
-
 
 const updateProductIntoDB = async (id: string, payload: Partial<TProduct>) => {
   const result = await Product.findByIdAndUpdate(
@@ -68,7 +67,15 @@ const deleteProductFromDB = async (id: string) => {
   return result;
 };
 
-
+const decreaseProductQuantity = async (id: string) => {
+  // পণ্যের পরিমাণ ১ কমান এবং আপডেট করুন
+  const updatedProduct = await Product.findByIdAndUpdate(
+    id,
+    { $inc: { quantity: -1 } },
+    { new: true, runValidators: true }
+  );
+  return updatedProduct;
+};
 
 export const productSerivces = {
   createProductIntoDB,
@@ -76,4 +83,5 @@ export const productSerivces = {
   getAllProductFromDB,
   updateProductIntoDB,
   deleteProductFromDB,
+  decreaseProductQuantity,
 };
