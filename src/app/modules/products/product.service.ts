@@ -68,7 +68,6 @@ const deleteProductFromDB = async (id: string) => {
 };
 
 const decreaseProductQuantity = async (id: string) => {
-  // পণ্যের পরিমাণ ১ কমান এবং আপডেট করুন
   const updatedProduct = await Product.findByIdAndUpdate(
     id,
     { $inc: { quantity: -1 } },
