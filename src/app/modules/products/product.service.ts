@@ -3,8 +3,14 @@ import { TFilterOptions, TProduct } from "./product.interface";
 import { Product } from "./product.model";
 
 const createProductIntoDB = async (payload: TProduct) => {
-  const result = await Product.create(payload);
-  return result;
+  try {
+    // Save product to the database
+    const result = await Product.create(payload);
+    return result;
+  } catch (error) {
+    console.error("Error creating product:", error);
+    throw new Error("Failed to create product");
+  }
 };
 
 const getSingleProductFromDB = async (id: string) => {
