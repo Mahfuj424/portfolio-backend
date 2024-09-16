@@ -73,14 +73,21 @@ const deleteProductFromDB = async (id: string) => {
   return result;
 };
 
-const decreaseProductQuantity = async (id: string) => {
+// Backend: Update Product Quantity
+const decreaseProductQuantity = async (id:string) => {
   const updatedProduct = await Product.findByIdAndUpdate(
     id,
     { $inc: { quantity: -1 } },
     { new: true, runValidators: true }
   );
+
+  if (!updatedProduct) {
+    throw new Error('Product not found');
+  }
+
   return updatedProduct;
 };
+
 
 export const productSerivces = {
   createProductIntoDB,

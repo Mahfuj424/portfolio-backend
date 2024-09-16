@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import catchAsync from "../../utils/catchAsync";
 const stripe = require("stripe")(
@@ -6,18 +7,19 @@ const stripe = require("stripe")(
 
 const makepaymentController = catchAsync(async (req, res, next) => {
   const { products } = req.body;
-  console.log(products);
 
-  const lineItems = products?.map((product) => ({
-    price_data: {
-      currency: "bdt",
-      product_data: {
-        name: product?.name,
+  const lineItems = products?.map(
+    (product: { name: string; price: number; quantity: number }) => ({
+      price_data: {
+        currency: "bdt",
+        product_data: {
+          name: product?.name,
+        },
+        unit_amount: product?.price * 100,
       },
-      unit_amount: product?.price * 100,
-    },
-    quantity: product?.quantity,
-  }));
+      quantity: product?.quantity,
+    })
+  );
 
   const session = await stripe?.checkout?.sessions?.create({
     payment_method_types: ["card"],
@@ -28,14 +30,6 @@ const makepaymentController = catchAsync(async (req, res, next) => {
   });
 
   res.json({ id: session?.id });
-  // const result = await productSerivces.deleteProductFromDB(id);
-
-  // sendResponse(res, {
-  //   statusCode: httpStatus.OK,
-  //   success: true,
-  //   message: "Product Deleted successfully",
-  //   data: result,
-  // });
 });
 
 export default makepaymentController;
