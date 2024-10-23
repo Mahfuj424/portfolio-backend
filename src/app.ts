@@ -1,4 +1,3 @@
-
 import express, { Request, Response } from "express";
 import cors from "cors";
 import router from "./app/routes";
@@ -10,7 +9,7 @@ app.use(cors());
 app.use("/api", router);
 
 const test = async (req: Request, res: Response) => {
-  res.send({ message: "Mechanical Keyboard server is running" });
+  res.send({ message: "Portfolio server is running😍" });
 };
 
 app.get("/", test);
