@@ -1,18 +1,17 @@
-import { Router } from 'express';
-import { productRoutes } from '../modules/products/product.route';
-import { paymentRoutes } from '../modules/payment/payment.route';
-
+import { Router } from "express";
+import { ProjectRoutes } from "../modules/project/project.route";
+import { UserRoutes } from "../modules/user/user.route";
 
 const router = Router();
 
 const moduleRoutes = [
   {
-    path: '/product',
-    route: productRoutes,
+    path: "/user",
+    route: UserRoutes,
   },
   {
-    path: '/create-checkout-session',
-    route: paymentRoutes,
+    path: "/project",
+    route: ProjectRoutes,
   },
 ];
 

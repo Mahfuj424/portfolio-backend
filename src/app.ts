@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/api", router);
+app.use("/api/v1", router);
 
 const test = async (req: Request, res: Response) => {
   res.send({ message: "Portfolio server is running😍" });
