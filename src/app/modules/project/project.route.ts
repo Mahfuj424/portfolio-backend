@@ -5,4 +5,10 @@ const router = Router();
 
 router.post("/create-project", ProjectControllers.createProject);
 
+router.get("/", ProjectControllers.getAllProjects);
+
+router.patch("/:projectId", ProjectControllers.updateProject);
+
+router.delete("/:projectId", ProjectControllers.deleteProject);
+
 export const ProjectRoutes = router;
