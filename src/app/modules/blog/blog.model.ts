@@ -31,7 +31,7 @@ const BlogSchema = new Schema(
     },
     views: {
       type: [Types.ObjectId],
-      ref: "User", // assuming views are from users
+      ref: "Views", // assuming views are from users
       default: [], // defaults to an empty array
     },
   },

@@ -4,6 +4,7 @@ import { UserRoutes } from "../modules/user/user.route";
 import { BlogRoutes } from "../modules/blog/blog.route";
 import { LikeRoutes } from "../modules/like/like.route";
 import { CommentRoutes } from "../modules/comment/comment.route";
+import { ViewsRoutes } from "../modules/views/views.route";
 
 const router = Router();
 
@@ -27,6 +28,10 @@ const moduleRoutes = [
   {
     path: "/comment",
     route: CommentRoutes,
+  },
+  {
+    path: "/views",
+    route: ViewsRoutes,
   },
 ];
 
