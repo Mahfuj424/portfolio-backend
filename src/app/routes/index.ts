@@ -6,6 +6,7 @@ import { LikeRoutes } from "../modules/like/like.route";
 import { CommentRoutes } from "../modules/comment/comment.route";
 import { ViewsRoutes } from "../modules/views/views.route";
 import { TechSkillRoutes } from "../modules/techSkills/techSkills.route";
+import { SoftSkillRoutes } from "../modules/softSkills/softSkills.route";
 
 const router = Router();
 
@@ -37,6 +38,10 @@ const moduleRoutes = [
   {
     path: "/tech",
     route: TechSkillRoutes,
+  },
+  {
+    path: "/soft",
+    route: SoftSkillRoutes,
   },
 ];
 
