@@ -9,7 +9,10 @@ const createBlogIntoDB = async (payload: IBlog) => {
 
 // Get all blogs or filter by category
 const getAllBlogs = async () => {
-  const blogs = await Blog.find();
+  const blogs = await Blog.find()
+    .populate("likes")
+    .populate("comments")
+    .populate("views");
   return blogs;
 };
 
