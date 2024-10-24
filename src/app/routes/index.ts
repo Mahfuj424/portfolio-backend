@@ -7,6 +7,7 @@ import { CommentRoutes } from "../modules/comment/comment.route";
 import { ViewsRoutes } from "../modules/views/views.route";
 import { TechSkillRoutes } from "../modules/techSkills/techSkills.route";
 import { SoftSkillRoutes } from "../modules/softSkills/softSkills.route";
+import { EducationRoutes } from "../modules/education/education.route";
 
 const router = Router();
 
@@ -42,6 +43,10 @@ const moduleRoutes = [
   {
     path: "/soft",
     route: SoftSkillRoutes,
+  },
+  {
+    path: "/education",
+    route: EducationRoutes,
   },
 ];
 
