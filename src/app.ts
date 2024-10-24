@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import router from "./app/routes";
+import notFound from "./app/middleware/notFoundRoute";
+import errorMiddleware from "./app/middleware/globalErrorHandler";
 const app = express();
 
 app.use(express.json());
@@ -13,5 +15,8 @@ const test = async (req: Request, res: Response) => {
 };
 
 app.get("/", test);
+
+app.use(notFound);
+app.use(errorMiddleware);
 
 export default app;
