@@ -5,8 +5,13 @@ import sendResponse from "../../utils/sendResponse";
 import { UserServices } from "./user.service";
 
 const createUser = catchAsync(async (req, res, next) => {
-  const { name, email, image } = req.body;
-  const result = await UserServices.createUserIntoDB(name, email, image);
+  const { name, email, image, password } = req.body;
+  const result = await UserServices.createUserIntoDB(
+    name,
+    email,
+    image,
+    password
+  );
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

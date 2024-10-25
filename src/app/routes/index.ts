@@ -9,6 +9,7 @@ import { TechSkillRoutes } from "../modules/techSkills/techSkills.route";
 import { SoftSkillRoutes } from "../modules/softSkills/softSkills.route";
 import { EducationRoutes } from "../modules/education/education.route";
 import { ExperienceRoutes } from "../modules/experience/experience.route";
+import { AuthRoutes } from "../modules/auth/auth.route";
 
 const router = Router();
 
@@ -52,6 +53,10 @@ const moduleRoutes = [
   {
     path: "/experience",
     route: ExperienceRoutes,
+  },
+  {
+    path: "/auth",
+    route: AuthRoutes,
   },
 ];
 

@@ -2,12 +2,17 @@
 
 import { User } from "./user.model";
 
-const createUserIntoDB = async (name: any, email: any, image: any) => {
+const createUserIntoDB = async (
+  name: any,
+  email: any,
+  image: any,
+  password: any
+) => {
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     throw new Error("User already exists!!");
   }
-  const result = await User.create({ name, email, image });
+  const result = await User.create({ name, email, image, password });
   return result;
 };
 

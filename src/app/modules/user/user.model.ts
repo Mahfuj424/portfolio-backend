@@ -14,6 +14,10 @@ const userSchema: Schema = new Schema<IUser>(
       unique: true,
       trim: true,
     },
+    password: {
+      type: String,
+      trim: true,
+    },
     image: {
       type: String,
       required: true,
@@ -21,7 +25,7 @@ const userSchema: Schema = new Schema<IUser>(
     role: {
       type: String,
       enum: ["user", "admin"],
-      default: "admin",
+      default: "user",
     },
   },
   { timestamps: true }
