@@ -33,6 +33,25 @@ const getAllProjects = catchAsync(async (req, res) => {
   });
 });
 
+const getSingleProjects = catchAsync(async (req, res) => {
+  const { projectId } = req.params;
+  const result = await ProjectServices.getSingleProjectFromDB(projectId);
+  if (!result) {
+    return sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      message: "Projects not found",
+      data: null,
+    });
+  }
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Projects retrieved successfully",
+    data: result,
+  });
+});
+
 const updateProject = catchAsync(async (req, res) => {
   const { projectId } = req.params;
   const body = req.body;
@@ -77,4 +96,5 @@ export const ProjectControllers = {
   getAllProjects,
   updateProject,
   deleteProject,
+  getSingleProjects,
 };

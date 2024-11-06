@@ -25,7 +25,9 @@ const getAllProjectsFromDB = async (category?: string) => {
 
   // Retrieve projects based on the query
   const projects = await Project.find(query);
-  return projects;
+
+  // Return projects or an empty array if no projects are found
+  return projects.length > 0 ? projects : [];
 };
 
 const updateProjectById = async (
@@ -39,6 +41,11 @@ const updateProjectById = async (
     throw new Error("Project not found or couldn't be updated");
   }
   return updatedProject;
+};
+
+const getSingleProjectFromDB = async (projectId: string) => {
+  const result = await Project.findById(projectId);
+  return result;
 };
 
 // Service to delete a project by ID
@@ -55,4 +62,5 @@ export const ProjectServices = {
   getAllProjectsFromDB,
   updateProjectById,
   deleteProjectById,
+  getSingleProjectFromDB,
 };

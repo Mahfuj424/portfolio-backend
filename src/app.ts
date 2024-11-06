@@ -6,7 +6,18 @@ import errorMiddleware from "./app/middleware/globalErrorHandler";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://portfolio-black-phi-46.vercel.app",
+      "https://portfolio-dashboard-eight-alpha.vercel.app",
+      "http://localhost:3000",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // Enable credentials if needed
+    allowedHeaders: ["Content-Type", "Authorization"], // Customize allowed headers
+  })
+);
 
 app.use("/api/v1", router);
 
