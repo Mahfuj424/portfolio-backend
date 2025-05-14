@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "https://portfolio-black-phi-46.vercel.app",
+      "https://mahfuj-alam.vercel.app",
       "https://portfolio-dashboard-eight-alpha.vercel.app",
       "http://localhost:3000",
     ],
