@@ -9,16 +9,13 @@ const createProjectIntoDB = async (payload: IProject) => {
     throw new Error("Project already exists!!");
   }
 
-  // Create the project using the payload
   const result = await Project.create(payload);
   return result;
 };
 
-// Service to get all projects or filter by category
 const getAllProjectsFromDB = async (category?: string) => {
   let query = {};
 
-  // If a category is provided, add it to the query
   if (category) {
     query = { category };
   }
